@@ -1,5 +1,15 @@
-const randomNumber = Math.floor(Math.random() * 100) + 1;
+let randomNumber;
 let attempts = 0;
+
+function startNewGame() {
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+
+    document.getElementById('guessInput').value = '';
+    document.getElementById('guessInput').disabled = false;
+    document.querySelector('button').disabled = false;
+    document.getElementById('message').textContent = '';
+}
 
 function checkGuess() {
     const guessInput = document.getElementById('guessInput');
@@ -14,8 +24,10 @@ function checkGuess() {
         if (userGuess === randomNumber) {
             message.textContent = `Congratulations! You guessed the correct number in ${attempts} attempts.`;
             disableInputAndButton();
+            setTimeout(startNewGame, 2000); // Reset the game after 2 seconds
         } else {
             message.textContent = userGuess > randomNumber ? 'Too high! Try again.' : 'Too low! Try again.';
+            guessInput.value = ''; // Clear the input for the new guess
         }
     }
 }
@@ -30,3 +42,6 @@ function handleKeyPress(event) {
         checkGuess();
     }
 }
+
+// Start a new game when the page loads
+window.onload = startNewGame;
