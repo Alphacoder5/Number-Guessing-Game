@@ -24,3 +24,9 @@ function disableInputAndButton() {
     document.getElementById('guessInput').disabled = true;
     document.querySelector('button').disabled = true;
 }
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        checkGuess();
+    }
+}
